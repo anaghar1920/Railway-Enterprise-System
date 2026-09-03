@@ -1,0 +1,174 @@
+/**
+ * Pure Algorithm Sorting Engine Visualizer
+ * Implements QuickSort (Median-of-3) & MergeSort with step recording for visual animations.
+ */
+class SortingEngine {
+
+    static calculateFare(train, fromCode, toCode, coachClass, quotaCode) {
+        const cls = RAILWAY_DATA.classes.find(c => c.code === coachClass) || RAILWAY_DATA.classes[2];
+        const q = RAILWAY_DATA.quotas.find(quo => quo.code === quotaCode) || RAILWAY_DATA.quotas[0];
+        
+        let dist = train.distanceKm;
+        const r1 = train.routes.find(r => r.station === fromCode);
+        const r2 = train.routes.find(r => r.station === toCode);
+        if (r1 && r2) {
+            dist = Math.abs(r2.dist - r1.dist);
+        }
+        
+        const base = Math.max(50, dist) * train.baseFareKm * cls.multiplier;
+        return Math.round(base * q.multiplier);
+    }
+
+    static calculateCompositeScore(train, fare) {
+        const durationFactor = 1000.0 / Math.max(60, train.durationMins);
+        const fareFactor = 1500.0 / Math.max(200, fare);
+        const punctualityFactor = train.punctuality * 20.0;
+        const ecoFactor = train.ecoScore * 0.5;
+        return (durationFactor * 0.35) + (fareFactor * 0.30) + (punctualityFactor * 0.25) + (ecoFactor * 0.10);
+    }
+
+    static getComparator(criteria, fromCode, toCode, coachClass, quotaCode) {
+        return (t1, t2) => {
+            const f1 = this.calculateFare(t1, fromCode, toCode, coachClass, quotaCode);
+            const f2 = this.calculateFare(t2, fromCode, toCode, coachClass, quotaCode);
+
+            switch (criteria) {
+                case "FARE_LOW_TO_HIGH":
+                    return f1 - f2;
+                case "FARE_HIGH_TO_LOW":
+                    return f2 - f1;
+                case "DURATION_FASTEST":
+                    return t1.durationMins - t2.durationMins;
+                case "DEPARTURE_EARLIEST":
+                    return t1.depTime.localeCompare(t2.depTime);
+                case "PUNCTUALITY_HIGHEST":
+                    return t2.punctuality - t1.punctuality;
+                case "ECO_SCORE_GREENEST":
+                    return t2.ecoScore - t1.ecoScore;
+                case "SMART_SCORE":
+                default: {
+                    const s1 = this.calculateCompositeScore(t1, f1);
+                    const s2 = this.calculateCompositeScore(t2, f2);
+                    return s2 - s1; // Higher score first
+                }
+            }
+        };
+    }
+
+    /**
+     * Executes QuickSort with step recorder for live DOM animations.
+     */
+    static runQuickSort(arr, comparator) {
+        const list = [...arr];
+        const steps = [];
+        let comparisons = 0;
+        let swaps = 0;
+        const startTime = performance.now();
+
+        const swap = (i, j) => {
+            if (i !== j) {
+                swaps++;
+                const tmp = list[i];
+                list[i] = list[j];
+                list[j] = tmp;
+                steps.push({ type: "swap", indices: [i, j], snapshot: [...list] });
+            }
+        };
+
+        const partition = (low, high) => {
+            const mid = Math.floor(low + (high - low) / 2);
+            if (comparator(list[mid], list[low]) < 0) swap(low, mid);
+            if (comparator(list[high], list[low]) < 0) swap(low, high);
+            if (comparator(list[high], list[mid]) < 0) swap(mid, high);
+
+            const pivot = list[high];
+            let i = low - 1;
+
+            for (let j = low; j < high; j++) {
+                comparisons++;
+                steps.push({ type: "compare", indices: [j, high], snapshot: [...list] });
+                if (comparator(list[j], pivot) <= 0) {
+                    i++;
+                    swap(i, j);
+                }
+            }
+            swap(i + 1, high);
+            return i + 1;
+        };
+
+        const sortHelper = (low, high) => {
+            if (low < high) {
+                const pi = partition(low, high);
+                sortHelper(low, pi - 1);
+                sortHelper(pi + 1, high);
+            }
+        };
+
+        sortHelper(0, list.length - 1);
+        const durationMs = performance.now() - startTime;
+
+        return {
+            sortedList: list,
+            comparisons,
+            swaps,
+            durationMs,
+            steps
+        };
+    }
+
+    /**
+     * Executes MergeSort with step recorder.
+     */
+    static runMergeSort(arr, comparator) {
+        const list = [...arr];
+        const steps = [];
+        let comparisons = 0;
+        let swaps = 0;
+        const startTime = performance.now();
+
+        const merge = (left, mid, right) => {
+            const temp = [];
+            let i = left;
+            let j = mid + 1;
+
+            while (i <= mid && j <= right) {
+                comparisons++;
+                steps.push({ type: "compare", indices: [i, j], snapshot: [...list] });
+                if (comparator(list[i], list[j]) <= 0) {
+                    temp.push(list[i++]);
+                } else {
+                    temp.push(list[j++]);
+                }
+            }
+
+            while (i <= mid) temp.push(list[i++]);
+            while (j <= right) temp.push(list[j++]);
+
+            for (let k = 0; k < temp.length; k++) {
+                swaps++;
+                list[left + k] = temp[k];
+                steps.push({ type: "merge_place", index: left + k, snapshot: [...list] });
+            }
+        };
+
+        const sortHelper = (left, right) => {
+            if (left < right) {
+                const mid = Math.floor(left + (right - left) / 2);
+                sortHelper(left, mid);
+                sortHelper(mid + 1, right);
+                merge(left, mid, right);
+            }
+        };
+
+        sortHelper(0, list.length - 1);
+        const durationMs = performance.now() - startTime;
+
+        return {
+            sortedList: list,
+            comparisons,
+            swaps,
+            durationMs,
+            steps
+        };
+    }
+}

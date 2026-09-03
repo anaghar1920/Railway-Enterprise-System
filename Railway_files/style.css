@@ -1,0 +1,660 @@
+/* ===================================================================
+   RAILWAY RESERVATION & INTELLIGENT ROUTING SYSTEM
+   Theme: Vintage Railway Ivory, Deep Blue, Espresso Brown & Brass Gold
+   =================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap');
+
+:root {
+    --bg-ivory: #F8F3ED;
+    --bg-sand: #EDE0D4;
+    --bg-card: #FFFFFF;
+    --border-color: #D7CCC8;
+    --border-subtle: #E8DFD8;
+    
+    --primary-blue: #0F4C81;
+    --primary-blue-hover: #1565C0;
+    --dark-blue: #1B2A4A;
+    --midnight-blue: #0D1B2A;
+    
+    --vintage-brown: #3E2723;
+    --rich-brown: #4E342E;
+    --earth-brown: #5D4037;
+    
+    --brass-gold: #C5A059;
+    --brass-gold-hover: #D4AF37;
+    --brass-gold-light: #FBF4E6;
+    
+    --charcoal-black: #1A1A1A;
+    --text-main: #212121;
+    --text-muted: #666666;
+    --text-light: #F9F9F9;
+    
+    --success-green: #2E7D32;
+    --warning-amber: #E65100;
+    --danger-red: #C62828;
+    
+    --shadow-soft: 0 4px 20px rgba(62, 39, 35, 0.08);
+    --shadow-hover: 0 10px 30px rgba(15, 76, 129, 0.15);
+    --shadow-vintage: 0 8px 0 var(--vintage-brown);
+    
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-ivory);
+    color: var(--text-main);
+    line-height: 1.6;
+    min-height: 100vh;
+    background-image: radial-gradient(#D7CCC8 0.75px, transparent 0.75px);
+    background-size: 24px 24px;
+}
+
+/* ================= Top Banner / Header ================= */
+.top-nav {
+    background: linear-gradient(135deg, var(--midnight-blue) 0%, var(--dark-blue) 60%, var(--vintage-brown) 100%);
+    border-bottom: 3px solid var(--brass-gold);
+    color: var(--text-light);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.nav-container {
+    max-width: 1350px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.brand-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.train-logo-icon {
+    font-size: 2.2rem;
+    background: rgba(197, 160, 89, 0.15);
+    border: 1px solid var(--brass-gold);
+    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: locomotivePulse 3s infinite ease-in-out;
+}
+
+@keyframes locomotivePulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(197, 160, 89, 0.4); }
+    50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(197, 160, 89, 0.6); }
+}
+
+.brand-text h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--brass-gold);
+    letter-spacing: 0.5px;
+}
+
+.brand-text p {
+    font-size: 0.82rem;
+    color: var(--bg-sand);
+    letter-spacing: 0.2px;
+}
+
+.nav-badges {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.engine-badge {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(197, 160, 89, 0.5);
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--brass-gold);
+}
+
+/* ================= Tabbed Navigation ================= */
+.tabs-navigation {
+    background: var(--bg-sand);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.5rem 2rem 0;
+}
+
+.tabs-container {
+    max-width: 1350px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.tab-btn {
+    padding: 0.75rem 1.25rem;
+    border: none;
+    background: transparent;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--earth-brown);
+    cursor: pointer;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+    white-space: nowrap;
+    border: 1px solid transparent;
+    border-bottom: none;
+}
+
+.tab-btn:hover {
+    background: rgba(255, 255, 255, 0.6);
+    color: var(--dark-blue);
+}
+
+.tab-btn.active {
+    background: var(--bg-card);
+    color: var(--primary-blue);
+    border-color: var(--border-color);
+    border-top: 3px solid var(--brass-gold);
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.03);
+}
+
+/* ================= Main Content Container ================= */
+.main-wrapper {
+    max-width: 1350px;
+    margin: 1.5rem auto;
+    padding: 0 1.5rem 4rem;
+}
+
+.tab-panel {
+    display: none;
+    animation: fadeIn 0.35s ease;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= Cards & Containers ================= */
+.rail-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.card-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--border-subtle);
+    padding-bottom: 0.85rem;
+    margin-bottom: 1.25rem;
+}
+
+.card-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.25rem;
+    color: var(--vintage-brown);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ================= Form Controls & Inputs ================= */
+.search-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    align-items: flex-end;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--rich-brown);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rail-input, .rail-select {
+    padding: 0.65rem 0.85rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-ivory);
+    color: var(--text-main);
+    transition: var(--transition);
+    outline: none;
+}
+
+.rail-input:focus, .rail-select:focus {
+    border-color: var(--primary-blue);
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.12);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+    color: var(--text-light);
+    border: none;
+    padding: 0.75rem 1.4rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--primary-blue-hover), var(--primary-blue));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(15, 76, 129, 0.25);
+}
+
+.btn-brass {
+    background: linear-gradient(135deg, var(--brass-gold), #A67C1E);
+    color: var(--charcoal-black);
+    border: none;
+    padding: 0.75rem 1.4rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-brass:hover {
+    background: linear-gradient(135deg, var(--brass-gold-hover), var(--brass-gold));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(197, 160, 89, 0.35);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1.5px solid var(--vintage-brown);
+    color: var(--vintage-brown);
+    padding: 0.65rem 1.1rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-outline:hover {
+    background: var(--vintage-brown);
+    color: var(--text-light);
+}
+
+/* ================= Sorting Telemetry Banner ================= */
+.telemetry-strip {
+    background: var(--midnight-blue);
+    border-left: 4px solid var(--brass-gold);
+    color: var(--bg-sand);
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+}
+
+.telemetry-metrics span {
+    color: var(--brass-gold);
+    font-weight: 700;
+    margin-right: 1rem;
+}
+
+/* ================= Train Listing Cards ================= */
+.train-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.train-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+    transition: var(--transition);
+    display: grid;
+    grid-template-columns: 1.8fr 2fr 1.2fr 1fr;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.train-card:hover {
+    border-color: var(--primary-blue);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+.train-info-left h3 {
+    font-size: 1.15rem;
+    color: var(--vintage-brown);
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.train-type-badge {
+    display: inline-block;
+    background: var(--bg-sand);
+    color: var(--earth-brown);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+}
+
+.train-timing {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.time-box .time {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--midnight-blue);
+}
+
+.time-box .stn {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.duration-line {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.duration-line span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+}
+
+.duration-bar {
+    width: 100%;
+    height: 2px;
+    background: var(--border-color);
+    position: relative;
+}
+
+.duration-bar::after {
+    content: "➔";
+    position: absolute;
+    right: -4px;
+    top: -8px;
+    font-size: 10px;
+    color: var(--vintage-brown);
+}
+
+.metric-pill-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.82rem;
+}
+
+.metric-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 600;
+}
+
+.metric-pill.stars { color: #E65100; }
+.metric-pill.eco { color: var(--success-green); }
+.metric-pill.smart { color: var(--primary-blue); font-family: 'JetBrains Mono', monospace; }
+
+.price-action-box {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+}
+
+.fare-amount {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--vintage-brown);
+}
+
+.seats-avail {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--success-green);
+}
+
+.seats-wl {
+    color: var(--warning-amber);
+}
+
+/* ================= 2D Coach & Berth Visualizer ================= */
+.coach-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0.5rem;
+    padding: 1rem;
+    background: var(--bg-ivory);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    margin-top: 1rem;
+}
+
+.berth-box {
+    background: #FFFFFF;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 0.65rem 0.25rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.berth-box:hover {
+    border-color: var(--primary-blue);
+    transform: scale(1.05);
+}
+
+.berth-box.senior-pref {
+    background: #FFF8E1;
+    border-color: var(--brass-gold);
+}
+
+.berth-box.booked {
+    background: #FFEBEE;
+    border-color: var(--danger-red);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.berth-box.selected {
+    background: var(--brass-gold);
+    border-color: var(--vintage-brown);
+    color: var(--charcoal-black);
+    font-weight: 800;
+}
+
+.berth-num {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.berth-code {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* ================= Split Route Timeline Cards ================= */
+.split-timeline-card {
+    background: #FFFFFF;
+    border: 1.5px dashed var(--primary-blue);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.split-legs-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.leg-card {
+    flex: 1;
+    background: var(--bg-ivory);
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+}
+
+.transfer-hub-pill {
+    background: var(--dark-blue);
+    color: var(--brass-gold);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* ================= Code & Documentation Explorer ================= */
+.doc-accordion-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.code-viewer-box {
+    background: #1E1E1E;
+    color: #D4D4D4;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    line-height: 1.5;
+}
+
+/* ================= Modal Styling ================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 27, 42, 0.75);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--bg-card);
+    border: 2px solid var(--brass-gold);
+    border-radius: var(--radius-lg);
+    width: 90%;
+    max-width: 850px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 2rem;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    animation: modalPop 0.3s ease;
+}
+
+@keyframes modalPop {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ================= Responsive Breakpoints ================= */
+@media (max-width: 900px) {
+    .train-card {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .price-action-box {
+        align-items: flex-start;
+        text-align: left;
+    }
+    .split-legs-wrapper {
+        flex-direction: column;
+    }
+    .coach-grid-layout {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

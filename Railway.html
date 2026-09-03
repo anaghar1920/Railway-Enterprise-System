@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:8080/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Railway Reservation &amp; Intelligent Routing Portal</title>
+    <meta name="description" content="Pure Java Railway Reservation System with advanced Multi-Criteria Sorting, Split-Ticket routing, and demographic berth allocation.">
+    <link rel="stylesheet" href="./Railway_files/style.css">
+</head>
+<body>
+
+    <!-- TOP NAVIGATION & BRANDING -->
+    <header class="top-nav">
+        <div class="nav-container">
+            <div class="brand-wrapper">
+                <div class="train-logo-icon">🚂</div>
+                <div class="brand-text">
+                    <h1>INDIAN RAILWAYS RESERVATION &amp; ROUTING ENGINE</h1>
+                    <p>Pure Java Architecture • Multi-Criteria Sorting Engine • Demographic Berth Allocator</p>
+                </div>
+            </div>
+            <div class="nav-badges">
+                <div class="engine-badge">⚙️ JVM Core &amp; Sorting Lab</div>
+                <div class="engine-badge">🎨 Vintage Railway Theme</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- TABBED NAVIGATION -->
+    <nav class="tabs-navigation">
+        <div class="tabs-container">
+            <button class="tab-btn active" data-tab="search-tab">🚆 Train Search &amp; Sorting Lab</button>
+            <button class="tab-btn" data-tab="split-tab">🔀 Smart Split-Ticket Recommender</button>
+            <button class="tab-btn" data-tab="booking-tab">🎟️ Passenger Booking &amp; Allocation</button>
+            <button class="tab-btn" data-tab="pnr-tab">🔍 Live PNR Status &amp; Cancellation</button>
+            <button class="tab-btn" data-tab="docs-tab">📚 Architecture (HLD &amp; LLD)</button>
+            <button class="tab-btn" data-tab="code-tab">💻 Java Source Code Explorer</button>
+        </div>
+    </nav>
+
+    <!-- MAIN APP CONTAINER -->
+    <main class="main-wrapper">
+
+        <!-- ================= TAB 1: TRAIN SEARCH & SORTING ================= -->
+        <section id="search-tab" class="tab-panel active">
+            <div class="rail-card">
+                <div class="card-header-bar">
+                    <h2 class="card-title">🔍 Multi-Criteria Train Search &amp; Algorithm Engine</h2>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Real-time sorting with QuickSort &amp; MergeSort</span>
+                </div>
+
+                <div class="search-grid">
+                    <div class="form-group">
+                        <label for="srcStation">From Station</label>
+                        <select id="srcStation" class="rail-select"><option value="NDLS">New Delhi (NDLS)</option><option value="MMCT">Mumbai Central (MMCT)</option><option value="HWH">Howrah Junction (HWH)</option><option value="MAS">Chennai Central (MAS)</option><option value="SBC">KSR Bengaluru (SBC)</option><option value="CNB">Kanpur Central (CNB)</option><option value="BPL">Bhopal Junction (BPL)</option><option value="ADI">Ahmedabad Junction (ADI)</option><option value="BSB">Varanasi Junction (BSB)</option><option value="JP">Jaipur Junction (JP)</option><option value="HYB">Hyderabad Deccan (HYB)</option><option value="PUNE">Pune Junction (PUNE)</option></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="destStation">To Station</label>
+                        <select id="destStation" class="rail-select"><option value="NDLS">New Delhi (NDLS)</option><option value="MMCT">Mumbai Central (MMCT)</option><option value="HWH">Howrah Junction (HWH)</option><option value="MAS">Chennai Central (MAS)</option><option value="SBC">KSR Bengaluru (SBC)</option><option value="CNB">Kanpur Central (CNB)</option><option value="BPL">Bhopal Junction (BPL)</option><option value="ADI">Ahmedabad Junction (ADI)</option><option value="BSB">Varanasi Junction (BSB)</option><option value="JP">Jaipur Junction (JP)</option><option value="HYB">Hyderabad Deccan (HYB)</option><option value="PUNE">Pune Junction (PUNE)</option></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="coachClass">Class</label>
+                        <select id="coachClass" class="rail-select"><option value="1A">👑 First AC (1A)</option><option value="2A">❄️ AC 2 Tier (2A)</option><option value="3A">❄️ AC 3 Tier (3A)</option><option value="CC">💺 AC Chair Car (CC)</option><option value="SL">🛏️ Sleeper Class (SL)</option></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quotaType">Quota</label>
+                        <select id="quotaType" class="rail-select"><option value="GENERAL">General Quota</option><option value="TATKAL">Tatkal Quota (Emergency)</option><option value="PREMIUM_TATKAL">Premium Tatkal (Dynamic Surge)</option><option value="SENIOR_CITIZEN">Senior Citizen / Lower Berth</option><option value="LADIES">Ladies Quota</option></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sortCriteria">Sort Priority</label>
+                        <select id="sortCriteria" class="rail-select">
+                            <option value="SMART_SCORE">🤖 AI Smart Composite Score</option>
+                            <option value="FARE_LOW_TO_HIGH">💰 Fare: Low to High</option>
+                            <option value="FARE_HIGH_TO_LOW">💎 Fare: High to Low</option>
+                            <option value="DURATION_FASTEST">⚡ Duration: Fastest Journey</option>
+                            <option value="DEPARTURE_EARLIEST">🌅 Departure: Earliest First</option>
+                            <option value="PUNCTUALITY_HIGHEST">⭐ Punctuality: Highest Rated</option>
+                            <option value="ECO_SCORE_GREENEST">🌱 Eco-Score: Greenest Train</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sortAlgorithm">Algorithm</label>
+                        <select id="sortAlgorithm" class="rail-select">
+                            <option value="QUICK_SORT">QuickSort (Median-of-3)</option>
+                            <option value="MERGE_SORT">MergeSort (Stable O(N log N))</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="display: flex; flex-direction: row; gap: 0.5rem;">
+                        <button id="swapStationsBtn" class="btn-outline" title="Swap Stations">⇄</button>
+                        <button id="searchBtn" class="btn-primary" style="flex: 1;">Search &amp; Sort</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sorting Telemetry -->
+            <div id="telemetryStrip" class="telemetry-strip">
+        <div class="telemetry-metrics">
+            <span>⚡ Algorithm:</span> QuickSort [Median-of-3 O(N log N)] &nbsp;|&nbsp;
+            <span>Criteria:</span> SMART SCORE &nbsp;|&nbsp;
+            <span>Comparisons:</span> 1 &nbsp;|&nbsp;
+            <span>Swaps:</span> 0 &nbsp;|&nbsp;
+            <span>Time:</span> 1.100 ms
+        </div>
+        <div class="telemetry-badge">JVM Algorithm Simulator Ready</div>
+    </div>
+
+            <!-- Train Cards Grid -->
+            <div id="trainListContainer" class="train-list-container"><div class="train-card">
+            <div class="train-info-left">
+                <h3>[12302] Howrah Rajdhani Express</h3>
+                <span class="train-type-badge">Superfast Premium</span>
+            </div>
+
+            <div class="train-timing">
+                <div class="time-box">
+                    <div class="time">16:50</div>
+                    <div class="stn">NDLS</div>
+                </div>
+                <div class="duration-line">
+                    <span>17h 5m</span>
+                    <div class="duration-bar"></div>
+                </div>
+                <div class="time-box">
+                    <div class="time">09:55</div>
+                    <div class="stn">HWH</div>
+                </div>
+            </div>
+
+            <div class="metric-pill-group">
+                <div class="metric-pill stars">★ 4.8 Punctuality</div>
+                <div class="metric-pill eco">🌱 88/100 Eco-Score</div>
+                <div class="metric-pill smart">AI Score: 28.8</div>
+            </div>
+
+            <div class="price-action-box">
+                <div class="fare-amount">₹4756</div>
+                <div class="seats-avail ">
+                    ✓ Available (54 seats)
+                </div>
+                <div style="display: flex; gap: 0.5rem; margin-top: 0.35rem;">
+                    <button class="btn-outline" onclick="openCoachLayoutModal(&#39;12302&#39;, &#39;3A&#39;)">Layout</button>
+                    <button class="btn-primary" onclick="selectTrainForBooking(&#39;12302&#39;)">Book</button>
+                </div>
+            </div>
+        </div><div class="train-card">
+            <div class="train-info-left">
+                <h3>[12382] Poorva Superfast Express</h3>
+                <span class="train-type-badge">Superfast Express</span>
+            </div>
+
+            <div class="train-timing">
+                <div class="time-box">
+                    <div class="time">17:40</div>
+                    <div class="stn">NDLS</div>
+                </div>
+                <div class="duration-line">
+                    <span>23h 15m</span>
+                    <div class="duration-bar"></div>
+                </div>
+                <div class="time-box">
+                    <div class="time">16:55</div>
+                    <div class="stn">HWH</div>
+                </div>
+            </div>
+
+            <div class="metric-pill-group">
+                <div class="metric-pill stars">★ 4.2 Punctuality</div>
+                <div class="metric-pill eco">🌱 74/100 Eco-Score</div>
+                <div class="metric-pill smart">AI Score: 25.1</div>
+            </div>
+
+            <div class="price-action-box">
+                <div class="fare-amount">₹2815</div>
+                <div class="seats-avail ">
+                    ✓ Available (32 seats)
+                </div>
+                <div style="display: flex; gap: 0.5rem; margin-top: 0.35rem;">
+                    <button class="btn-outline" onclick="openCoachLayoutModal(&#39;12382&#39;, &#39;3A&#39;)">Layout</button>
+                    <button class="btn-primary" onclick="selectTrainForBooking(&#39;12382&#39;)">Book</button>
+                </div>
+            </div>
+        </div></div>
+        </section>
+
+        <!-- ================= TAB 2: SMART SPLIT-TICKET RECOMMENDER ================= -->
+        <section id="split-tab" class="tab-panel">
+            <div class="rail-card">
+                <div class="card-header-bar">
+                    <h2 class="card-title">🔀 Smart Split-Ticket &amp; Multi-Leg Junction Recommender</h2>
+                    <span class="engine-badge">Unique Enhancing Feature</span>
+                </div>
+                <p style="color: var(--rich-brown); margin-bottom: 1.25rem; font-size: 0.95rem;">
+                    💡 <b>How it works:</b> When direct trains on popular routes are waitlisted, our graph-based junction router calculates confirmed berths across 2 connecting trains via intermediate junction stations (e.g. Kanpur Central, Bhopal Junction, Pune) with optimal transfer layovers.
+                </p>
+
+                <div class="search-grid" style="grid-template-columns: 1fr 1fr auto; max-width: 750px;">
+                    <div class="form-group">
+                        <label for="splitSrcStation">Origin Station</label>
+                        <select id="splitSrcStation" class="rail-select"><option value="NDLS">New Delhi (NDLS)</option><option value="MMCT">Mumbai Central (MMCT)</option><option value="HWH">Howrah Junction (HWH)</option><option value="MAS">Chennai Central (MAS)</option><option value="SBC">KSR Bengaluru (SBC)</option><option value="CNB">Kanpur Central (CNB)</option><option value="BPL">Bhopal Junction (BPL)</option><option value="ADI">Ahmedabad Junction (ADI)</option><option value="BSB">Varanasi Junction (BSB)</option><option value="JP">Jaipur Junction (JP)</option><option value="HYB">Hyderabad Deccan (HYB)</option><option value="PUNE">Pune Junction (PUNE)</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="splitDestStation">Destination Station</label>
+                        <select id="splitDestStation" class="rail-select"><option value="NDLS">New Delhi (NDLS)</option><option value="MMCT">Mumbai Central (MMCT)</option><option value="HWH">Howrah Junction (HWH)</option><option value="MAS">Chennai Central (MAS)</option><option value="SBC">KSR Bengaluru (SBC)</option><option value="CNB">Kanpur Central (CNB)</option><option value="BPL">Bhopal Junction (BPL)</option><option value="ADI">Ahmedabad Junction (ADI)</option><option value="BSB">Varanasi Junction (BSB)</option><option value="JP">Jaipur Junction (JP)</option><option value="HYB">Hyderabad Deccan (HYB)</option><option value="PUNE">Pune Junction (PUNE)</option></select>
+                    </div>
+                    <div class="form-group">
+                        <button id="findSplitBtn" class="btn-primary" style="height: 42px;">Find Split Routes</button>
+                    </div>
+                </div>
+
+                <div id="splitRoutesContainer" style="margin-top: 1.5rem;">
+                    <!-- Injected via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 3: PASSENGER BOOKING & ALLOCATION ================= -->
+        <section id="booking-tab" class="tab-panel">
+            <div class="rail-card">
+                <div id="selectedTrainBanner" style="background: var(--midnight-blue); color: var(--brass-gold); padding: 0.85rem 1.25rem; border-radius: 8px; margin-bottom: 1.25rem; font-size: 0.95rem;">
+                    <b>Selected Train:</b> [12302] Howrah Rajdhani Express &nbsp;|&nbsp; <b>Route:</b> NDLS ➔ HWH &nbsp;|&nbsp; <b>Class:</b> 3A &nbsp;|&nbsp; <b>Fare/Seat:</b> ₹4756
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.5rem;">
+                    <!-- Left: Passenger manifest -->
+                    <div>
+                        <div class="card-header-bar">
+                            <h3 class="card-title" style="font-size: 1.1rem;">👥 Passenger Manifest &amp; Demographics</h3>
+                            <button id="sampleFamilyBtn" class="btn-outline" style="font-size: 0.8rem; padding: 0.35rem 0.75rem;">👨‍👩‍👧 Load Sample Family</button>
+                        </div>
+                        <div id="passengerList"><div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0.8rem; background: rgb(255, 255, 255); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 0.5rem;">
+            <div>
+                <b>Harish Verma (Senior)</b> (68y, M)
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Pref: LOWER | ⭐ Senior/Special Priority</div>
+            </div>
+            <button style="background: none; border: none; color: var(--danger-red); cursor: pointer; font-size: 1.1rem;" onclick="removePassenger(0)">✕</button>
+        </div><div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0.8rem; background: rgb(255, 255, 255); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 0.5rem;">
+            <div>
+                <b>Meenakshi Verma (Mother)</b> (40y, F)
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Pref: LOWER | General</div>
+            </div>
+            <button style="background: none; border: none; color: var(--danger-red); cursor: pointer; font-size: 1.1rem;" onclick="removePassenger(1)">✕</button>
+        </div><div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0.8rem; background: rgb(255, 255, 255); border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 0.5rem;">
+            <div>
+                <b>Rohan Verma (Son)</b> (14y, M)
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Pref: UPPER | General</div>
+            </div>
+            <button style="background: none; border: none; color: var(--danger-red); cursor: pointer; font-size: 1.1rem;" onclick="removePassenger(2)">✕</button>
+        </div></div>
+                        <button id="addPassengerBtn" class="btn-outline" style="width: 100%; margin-top: 0.5rem;">+ Add Passenger</button>
+                    </div>
+
+                    <!-- Right: Allocation & Action -->
+                    <div>
+                        <div class="card-header-bar">
+                            <h3 class="card-title" style="font-size: 1.1rem;">⚡ Demographic Berth Allocation Engine</h3>
+                        </div>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+                            Our custom Java comparator prioritizes <b>Senior Citizens (60+)</b> and passengers with special needs for <b>Lower Berths (LB)</b> while keeping family members contiguous.
+                        </p>
+
+                        <button id="confirmBookingBtn" class="btn-brass" style="width: 100%; font-size: 1.05rem; padding: 0.9rem;">
+                            🎟️ Confirm &amp; Allocate Berths (Demographic Sorter)
+                        </button>
+
+                        <div id="bookingResultBox" style="margin-top: 1rem;">
+                            <!-- Injected after booking -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 4: PNR STATUS & CANCELLATION ================= -->
+        <section id="pnr-tab" class="tab-panel">
+            <div class="rail-card">
+                <div class="card-header-bar">
+                    <h2 class="card-title">🔍 Live PNR Status &amp; Waitlist Confirmation Tracker</h2>
+                </div>
+
+                <div style="display: flex; gap: 1rem; max-width: 650px; margin-bottom: 1.5rem;">
+                    <input type="text" id="pnrInput" class="rail-input" placeholder="Enter 10-Digit PNR (e.g. 248-8910472)" value="248-8910472" style="flex: 1; font-size: 1.1rem;">
+                    <button id="queryPnrBtn" class="btn-primary">Query PNR</button>
+                    <button id="cancelPnrBtn" class="btn-outline" style="border-color: var(--danger-red); color: var(--danger-red);">Cancel Ticket</button>
+                </div>
+
+                <div id="pnrResultBox">
+                    <!-- Injected via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 5: ARCHITECTURE (HLD & LLD) ================= -->
+        <section id="docs-tab" class="tab-panel">
+            <div class="rail-card">
+                <div class="card-header-bar">
+                    <h2 class="card-title">🏛️ System Architecture: High-Level (HLD) &amp; Low-Level Design (LLD)</h2>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+                    <!-- HLD Card -->
+                    <div style="background: var(--bg-ivory); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.25rem;">
+                        <h3 style="color: var(--primary-blue); margin-bottom: 0.5rem;">🌐 High-Level Design (HLD)</h3>
+                        <ul style="padding-left: 1.2rem; font-size: 0.9rem; color: var(--rich-brown); line-height: 1.8;">
+                            <li><b>Layered Architecture:</b> Presentation (Swing &amp; Web), Service Layer, Algorithm &amp; Sorting Engine, In-Memory Repository.</li>
+                            <li><b>Multi-Criteria Sorting Engine:</b> Dynamic QuickSort &amp; MergeSort across 8 dimensions.</li>
+                            <li><b>Split-Ticket Router:</b> Multi-hop BFS traversal over Railway Junction network graph.</li>
+                            <li><b>Dynamic PNR Predictor:</b> Probabilistic waitlist confirmation heuristic.</li>
+                        </ul>
+                    </div>
+
+                    <!-- LLD Card -->
+                    <div style="background: var(--bg-ivory); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.25rem;">
+                        <h3 style="color: var(--vintage-brown); margin-bottom: 0.5rem;">⚙️ Low-Level Design (LLD) &amp; Patterns</h3>
+                        <ul style="padding-left: 1.2rem; font-size: 0.9rem; color: var(--rich-brown); line-height: 1.8;">
+                            <li><b>Strategy Pattern:</b> <code style="font-family:monospace;">TrainSorter</code> with interchangeable sorting strategies.</li>
+                            <li><b>Factory Pattern:</b> <code style="font-family:monospace;">MultiCriteriaComparator.getComparator()</code>.</li>
+                            <li><b>Demographic Proximity Heuristic:</b> Age &amp; disability priority Lower Berth assignment.</li>
+                            <li><b>Thread Safety:</b> Atomic PNR counter and synchronized seat state transitions.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Mathematical Formulation Box -->
+                <div style="margin-top: 1.5rem; background: #FAF7F2; border: 1px solid var(--brass-gold); border-radius: 8px; padding: 1.25rem;">
+                    <h4 style="color: var(--midnight-blue); margin-bottom: 0.5rem;">📐 AI Composite Heuristic Ranking Formula:</h4>
+                    <pre class="code-viewer-box">Fitness_Score = (0.35 * (1000 / Duration_Mins)) 
+              + (0.30 * (1500 / Fare_INR)) 
+              + (0.25 * (Punctuality_Stars * 20)) 
+              + (0.10 * (Eco_Score * 0.5))</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 6: JAVA SOURCE CODE EXPLORER ================= -->
+        <section id="code-tab" class="tab-panel">
+            <div class="rail-card">
+                <div class="card-header-bar">
+                    <h2 class="card-title">💻 Pure Java Source Code &amp; Compilation Manual</h2>
+                    <span class="engine-badge">100% Core Java (JDK 8 / 11 / 17 / 21)</span>
+                </div>
+
+                <div style="margin-bottom: 1.25rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="btn-primary" onclick="alert(&#39;Run command in terminal:\njavac -d bin -sourcepath src src/com/railway/Main.java\njava -cp bin com.railway.Main&#39;)">📋 View Build Commands</button>
+                    <button class="btn-brass" onclick="alert(&#39;Standalone executable JAR available:\nDouble-click compile_and_run.bat or run:\njava -jar RailwaySystem.jar&#39;)">📦 Run Standalone JAR</button>
+                </div>
+
+                <h4 style="color: var(--midnight-blue); margin-bottom: 0.5rem;">Core QuickSort Algorithm Implementation (from <code style="color:var(--primary-blue);">TrainSorter.java</code>):</h4>
+                <pre class="code-viewer-box">public static List&lt;Train&gt; quickSort(List&lt;Train&gt; list, Comparator&lt;Train&gt; comparator, SortMetrics metrics) {
+    if (list == null || list.size() &lt;= 1) return list;
+    long start = System.nanoTime();
+    quickSortHelper(list, 0, list.size() - 1, comparator, metrics);
+    metrics.executionTimeNanos = System.nanoTime() - start;
+    return list;
+}
+
+private static int partition(List&lt;Train&gt; list, int low, int high, Comparator&lt;Train&gt; comparator, SortMetrics metrics) {
+    // Median-of-three pivot selection
+    int mid = low + (high - low) / 2;
+    if (comparator.compare(list.get(mid), list.get(low)) &lt; 0) swap(list, low, mid, metrics);
+    if (comparator.compare(list.get(high), list.get(low)) &lt; 0) swap(list, low, high, metrics);
+    if (comparator.compare(list.get(high), list.get(mid)) &lt; 0) swap(list, mid, high, metrics);
+
+    Train pivot = list.get(high);
+    int i = low - 1;
+    for (int j = low; j &lt; high; j++) {
+        metrics.comparisons++;
+        if (comparator.compare(list.get(j), pivot) &lt;= 0) {
+            i++;
+            swap(list, i, j, metrics);
+        }
+    }
+    swap(list, i + 1, high, metrics);
+    return i + 1;
+}</pre>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 2D COACH LAYOUT MODAL -->
+    <div id="coachLayoutModal" class="modal-overlay">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 0.75rem;">
+                <h3 id="modalTrainTitle" style="color: var(--midnight-blue);">Coach Layout &amp; Berth Map</h3>
+                <button onclick="closeCoachModal()" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--vintage-brown);">✕</button>
+            </div>
+
+            <div style="display: flex; gap: 1rem; margin-top: 1rem; font-size: 0.85rem; font-weight: 600;">
+                <div>🟩 Available</div>
+                <div>🟨 Senior Preferred (Lower Berth)</div>
+                <div>🟥 Booked</div>
+            </div>
+
+            <div id="coachGridContainer" class="coach-grid-layout">
+                <!-- Injected via JavaScript -->
+            </div>
+
+            <div style="text-align: right; margin-top: 1.5rem;">
+                <button class="btn-primary" onclick="closeCoachModal()">Done Viewing</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="./Railway_files/data.js.download"></script>
+    <script src="./Railway_files/sortingEngine.js.download"></script>
+    <script src="./Railway_files/app.js.download"></script>
+
+
+</body></html>

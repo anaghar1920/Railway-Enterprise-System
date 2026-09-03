@@ -1,0 +1,210 @@
+/**
+ * Data store of Stations, Trains, Coaches, and Quotas for the Railway Reservation Portal.
+ */
+const RAILWAY_DATA = {
+    stations: [
+        { code: "NDLS", name: "New Delhi", city: "Delhi", isJunction: true, platforms: 16 },
+        { code: "MMCT", name: "Mumbai Central", city: "Mumbai", isJunction: true, platforms: 8 },
+        { code: "HWH",  name: "Howrah Junction", city: "Kolkata", isJunction: true, platforms: 23 },
+        { code: "MAS",  name: "Chennai Central", city: "Chennai", isJunction: true, platforms: 12 },
+        { code: "SBC",  name: "KSR Bengaluru", city: "Bengaluru", isJunction: true, platforms: 10 },
+        { code: "CNB",  name: "Kanpur Central", city: "Kanpur", isJunction: true, platforms: 10 },
+        { code: "BPL",  name: "Bhopal Junction", city: "Bhopal", isJunction: true, platforms: 6 },
+        { code: "ADI",  name: "Ahmedabad Junction", city: "Ahmedabad", isJunction: true, platforms: 12 },
+        { code: "BSB",  name: "Varanasi Junction", city: "Varanasi", isJunction: true, platforms: 9 },
+        { code: "JP",   name: "Jaipur Junction", city: "Jaipur", isJunction: true, platforms: 8 },
+        { code: "HYB",  name: "Hyderabad Deccan", city: "Hyderabad", isJunction: true, platforms: 6 },
+        { code: "PUNE", name: "Pune Junction", city: "Pune", isJunction: true, platforms: 6 }
+    ],
+
+    quotas: [
+        { code: "GENERAL", name: "General Quota", multiplier: 1.0, priority: 1 },
+        { code: "TATKAL", name: "Tatkal Quota (Emergency)", multiplier: 1.35, priority: 2 },
+        { code: "PREMIUM_TATKAL", name: "Premium Tatkal (Dynamic Surge)", multiplier: 1.65, priority: 3 },
+        { code: "SENIOR_CITIZEN", name: "Senior Citizen / Lower Berth", multiplier: 0.60, priority: 4 },
+        { code: "LADIES", name: "Ladies Quota", multiplier: 1.0, priority: 5 }
+    ],
+
+    classes: [
+        { code: "1A", name: "First AC (1A)", multiplier: 3.5, icon: "👑" },
+        { code: "2A", name: "AC 2 Tier (2A)", multiplier: 2.4, icon: "❄️" },
+        { code: "3A", name: "AC 3 Tier (3A)", multiplier: 1.6, icon: "❄️" },
+        { code: "CC", name: "AC Chair Car (CC)", multiplier: 1.4, icon: "💺" },
+        { code: "SL", name: "Sleeper Class (SL)", multiplier: 1.0, icon: "🛏️" }
+    ],
+
+    trains: [
+        {
+            number: "22436",
+            name: "Vande Bharat Express",
+            type: "Semi-High Speed",
+            source: "NDLS",
+            destination: "BSB",
+            depTime: "06:00",
+            arrTime: "14:00",
+            durationMins: 480,
+            distanceKm: 759,
+            baseFareKm: 1.85,
+            punctuality: 4.9,
+            ecoScore: 95,
+            classes: ["CC", "1A"],
+            seats: { "CC": 42, "1A": 18 },
+            routes: [
+                { station: "NDLS", seq: 1, dist: 0, dep: "06:00", arr: null },
+                { station: "CNB", seq: 2, dist: 440, dep: "10:10", arr: "10:08" },
+                { station: "BSB", seq: 3, dist: 759, dep: null, arr: "14:00" }
+            ]
+        },
+        {
+            number: "12302",
+            name: "Howrah Rajdhani Express",
+            type: "Superfast Premium",
+            source: "NDLS",
+            destination: "HWH",
+            depTime: "16:50",
+            arrTime: "09:55",
+            durationMins: 1025,
+            distanceKm: 1450,
+            baseFareKm: 2.05,
+            punctuality: 4.8,
+            ecoScore: 88,
+            classes: ["1A", "2A", "3A", "SL"],
+            seats: { "1A": 12, "2A": 24, "3A": 54, "SL": 38 },
+            routes: [
+                { station: "NDLS", seq: 1, dist: 0, dep: "16:50", arr: null },
+                { station: "CNB", seq: 2, dist: 440, dep: "21:35", arr: "21:30" },
+                { station: "BSB", seq: 3, dist: 760, dep: "01:50", arr: "01:40" },
+                { station: "HWH", seq: 4, dist: 1450, dep: null, arr: "09:55" }
+            ]
+        },
+        {
+            number: "12382",
+            name: "Poorva Superfast Express",
+            type: "Superfast Express",
+            source: "NDLS",
+            destination: "HWH",
+            depTime: "17:40",
+            arrTime: "16:55",
+            durationMins: 1395,
+            distanceKm: 1530,
+            baseFareKm: 1.15,
+            punctuality: 4.2,
+            ecoScore: 74,
+            classes: ["2A", "3A", "SL"],
+            seats: { "2A": 18, "3A": 32, "SL": 64 },
+            routes: [
+                { station: "NDLS", seq: 1, dist: 0, dep: "17:40", arr: null },
+                { station: "CNB", seq: 2, dist: 440, dep: "23:10", arr: "23:00" },
+                { station: "BSB", seq: 3, dist: 760, dep: "05:25", arr: "05:15" },
+                { station: "HWH", seq: 4, dist: 1530, dep: null, arr: "16:55" }
+            ]
+        },
+        {
+            number: "12952",
+            name: "Mumbai Rajdhani Express",
+            type: "Superfast Premium",
+            source: "NDLS",
+            destination: "MMCT",
+            depTime: "16:55",
+            arrTime: "08:35",
+            durationMins: 940,
+            distanceKm: 1386,
+            baseFareKm: 2.10,
+            punctuality: 4.8,
+            ecoScore: 89,
+            classes: ["1A", "2A", "3A"],
+            seats: { "1A": 14, "2A": 28, "3A": 60 },
+            routes: [
+                { station: "NDLS", seq: 1, dist: 0, dep: "16:55", arr: null },
+                { station: "BPL", seq: 2, dist: 700, dep: "23:55", arr: "23:50" },
+                { station: "MMCT", seq: 3, dist: 1386, dep: null, arr: "08:35" }
+            ]
+        },
+        {
+            number: "12616",
+            name: "Grand Trunk Express",
+            type: "Superfast Express",
+            source: "NDLS",
+            destination: "MAS",
+            depTime: "16:10",
+            arrTime: "04:30",
+            durationMins: 2180,
+            distanceKm: 2182,
+            baseFareKm: 1.20,
+            punctuality: 4.3,
+            ecoScore: 78,
+            classes: ["2A", "3A", "SL"],
+            seats: { "2A": 15, "3A": 40, "SL": 70 },
+            routes: [
+                { station: "NDLS", seq: 1, dist: 0, dep: "16:10", arr: null },
+                { station: "BPL", seq: 2, dist: 700, dep: "03:20", arr: "03:15" },
+                { station: "HYB", seq: 3, dist: 1500, dep: "18:00", arr: "17:45" },
+                { station: "MAS", seq: 4, dist: 2182, dep: null, arr: "04:30" }
+            ]
+        },
+        {
+            number: "12628",
+            name: "Karnataka Express",
+            type: "Superfast Express",
+            source: "NDLS",
+            destination: "SBC",
+            depTime: "20:20",
+            arrTime: "12:00",
+            durationMins: 2380,
+            distanceKm: 2400,
+            baseFareKm: 1.25,
+            punctuality: 4.5,
+            ecoScore: 80,
+            classes: ["1A", "2A", "3A", "SL"],
+            seats: { "1A": 8, "2A": 22, "3A": 48, "SL": 65 },
+            routes: [
+                { station: "NDLS", seq: 1, dist: 0, dep: "20:20", arr: null },
+                { station: "BPL", seq: 2, dist: 700, dep: "06:30", arr: "06:25" },
+                { station: "SBC", seq: 3, dist: 2400, dep: null, arr: "12:00" }
+            ]
+        },
+        // Connecting trains for split routes
+        {
+            number: "12176",
+            name: "Chambal Express",
+            type: "Superfast Express",
+            source: "CNB",
+            destination: "HWH",
+            depTime: "11:15",
+            arrTime: "06:45",
+            durationMins: 1170,
+            distanceKm: 1010,
+            baseFareKm: 1.05,
+            punctuality: 4.1,
+            ecoScore: 72,
+            classes: ["3A", "SL"],
+            seats: { "3A": 45, "SL": 80 },
+            routes: [
+                { station: "CNB", seq: 1, dist: 0, dep: "11:15", arr: null },
+                { station: "BSB", seq: 2, dist: 320, dep: "16:55", arr: "16:45" },
+                { station: "HWH", seq: 3, dist: 1010, dep: null, arr: "06:45" }
+            ]
+        },
+        {
+            number: "12154",
+            name: "Habibganj LTT Superfast",
+            type: "Superfast Express",
+            source: "BPL",
+            destination: "MMCT",
+            depTime: "18:00",
+            arrTime: "07:30",
+            durationMins: 810,
+            distanceKm: 830,
+            baseFareKm: 1.18,
+            punctuality: 4.4,
+            ecoScore: 76,
+            classes: ["2A", "3A", "SL"],
+            seats: { "2A": 20, "3A": 38, "SL": 55 },
+            routes: [
+                { station: "BPL", seq: 1, dist: 0, dep: "18:00", arr: null },
+                { station: "PUNE", seq: 2, dist: 680, dep: "04:25", arr: "04:15" },
+                { station: "MMCT", seq: 3, dist: 830, dep: null, arr: "07:30" }
+            ]
+        }
+    ]
+};
